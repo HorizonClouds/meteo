@@ -1,0 +1,35 @@
+openapi: 3.0.0
+info:
+  title: Meteo API
+  version: 1.0.0
+paths:
+  /api/v1/forecast:
+    get:
+      summary: Get weather forecast
+      description: |
+        You can use any parameter from the Open-Meteo documentation: [Open-Meteo Docs](https://open-meteo.com/en/docs)
+      parameters:
+        - name: latitude
+          in: query
+          required: true
+          schema:
+            type: number
+          example: 37.3891
+        - name: longitude
+          in: query
+          required: true
+          schema:
+            type: number
+          example:  -5.994072
+        - name: daily
+          in: query
+          required: false
+          schema:
+            type: string
+          example: temperature_2m_max,temperature_2m_min,rain_sum,precipitation_probability_max
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    # Define schemas if needed
