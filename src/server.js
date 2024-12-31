@@ -1,16 +1,13 @@
-// server.js
+import config from './config.js'; // Load environment variables at the very beginning
 
 import express from 'express';
-import dotenv from 'dotenv';
 import standardizedResponse from './middlewares/standardResponseMiddleware.js';
 import errorHandler from './middlewares/errorHandler.js';
 import meteoRoute from './routes/meteoRoute.js';
 import { swaggerSetup } from './swagger.js';
 
-dotenv.config();
-
 const app = express();
-const port = process.env.BACKEND_PORT || 3000;
+const port = config.backendPort;
 
 app.use(express.json());
 app.use(standardizedResponse);

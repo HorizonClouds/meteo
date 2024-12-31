@@ -74,6 +74,25 @@ export class WrongMeteoCall extends Error {
     this.statusCode = stdOptions.codes.badRequest;
   }
 }
+
+export class RateLimitExceededError extends Error {
+  constructor(message = 'Rate limit exceeded', details) {
+    super(message);
+    this.details = details;
+    this.appCode = stdOptions.appCodes.rateLimitExceeded;
+    this.statusCode = stdOptions.codes.badRequest;
+  }
+}
+
+export class TooManyRequestsError extends Error {
+  constructor(message = 'Too many requests', details) {
+    super(message);
+    this.details = details;
+    this.appCode = stdOptions.appCodes.tooManyRequests;
+    this.statusCode = stdOptions.codes.badRequest;
+  }
+}
+
 export default {
   NotFoundError,
   BadRequestError,
@@ -81,4 +100,6 @@ export default {
   UnauthorizedError,
   ForbiddenError,
   WrongMeteoCall,
+  RateLimitExceededError,
+  TooManyRequestsError,
 };

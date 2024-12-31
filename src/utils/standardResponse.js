@@ -22,6 +22,8 @@ export const stdOptions = {
     internalServerError: 'INTERNAL_SERVER_ERROR',
     badJson: 'BAD_JSON',
     wrongMeteroCall: 'WRONG_METEO_CALL',
+    tooManyRequests: 'TOO_MANY_REQUESTS',
+    rateLimitExceeded: 'RATE_LIMIT_EXCEEDED',
   },
   status: {
     success: 'success', // 2xx
