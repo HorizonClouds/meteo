@@ -1,6 +1,6 @@
 import { RateLimitExceededError, TooManyRequestsError } from './customErrors.js';
+import logger from './logger.js';
 import config from '../config.js';
-
 const rateLimitConfig = {
   maxRequestsPerMinute: config.maxRequestsPerMinute,
   minIntervalBetweenRequests: config.minIntervalBetweenRequests,
@@ -21,7 +21,7 @@ export const rateLimiter = () => {
     timeSinceLastRequest: timeSinceLastRequest,
     minIntervalBetweenRequests: rateLimitConfig.minIntervalBetweenRequests,
   };
-  console.log(details);
+  logger.info(JSON.stringify(details));
 
   // Check the number of requests in the last 60 seconds (moving window)
   if (requestTimestamps.length >= rateLimitConfig.maxRequestsPerMinute) {

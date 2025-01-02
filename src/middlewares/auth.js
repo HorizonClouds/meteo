@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
+import logger from '../utils/logger.js';
 import config from '../config.js';
 import { ForbiddenError } from '../utils/customErrors.js';
-import standardResponse from '../utils/standardResponse.js';
 
 const JWT_SECRET = config.jwtSecret;
 let allowedServicesArray = config.allowedServices.split(',');
@@ -34,6 +34,6 @@ const authenticateToken = (req, res, next) => {
 
 // Print a vaild token to the console
 const token = jwt.sign({ serviceId: 'admin-service' }, JWT_SECRET, { expiresIn: '30m' });
-console.log('Valid token:\n', token);
+logger.info('Valid token:\n'+ token);
 
 export default authenticateToken;

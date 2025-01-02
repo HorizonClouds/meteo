@@ -1,4 +1,5 @@
 import { CircuitBreakerError, RateLimitExceededError, TooManyRequestsError } from './customErrors.js';
+import logger from '../utils/logger.js';
 import config from '../config.js';
 import { rateLimiter } from '../utils/rateLimiter.js';
 let successCount = 0;
@@ -39,7 +40,7 @@ const circuitBreaker = async (getResponseCallback, forceOpen = false) => {
     // Case OPEN
 
     if(forceOpen){
-        console.log('Forcing open');
+        logger.debug('Forcing open');
         lastFailureTime = Date.now();
         errorTimestamps.push(Date.now());
         successCount = 0;  
@@ -49,7 +50,7 @@ const circuitBreaker = async (getResponseCallback, forceOpen = false) => {
     if (circuitState === 'OPEN') {
         if (timeLeftUntilReset <= 0) { // Timeout has passed, do not throw error
             circuitState = 'HALF-OPEN';
-            console.log('Circuit is half open');
+            logger.debug('Circuit is half open');
         } else {
             throw new CircuitBreakerError('Too many errors, circuit is open.', getUpdatedDetails());
         }

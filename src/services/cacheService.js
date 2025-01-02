@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+import logger from '../utils/logger.js';
 import config from '../config.js';
 
 const client = createClient({
@@ -14,7 +15,7 @@ const checkCache = async (url) => {
     try {
         const cachedData = await client.get(url);
         if (cachedData) {
-            console.log(`CACHED: ${url}`);
+            logger.info(`CACHED: ${url}`);
             return JSON.parse(cachedData);
         }
         return null;
@@ -27,7 +28,7 @@ const checkCache = async (url) => {
 const storeInCache = async (url, data, ttl = config.redisTTL) => {
     try {
         await client.set(url, JSON.stringify(data), { EX: ttl });
-        console.log(`Stored in cache: ${url}`);
+        logger.info(`Stored in cache: ${url}`);
     } catch (error) {
         console.error(`Error storing data in cache for ${url}:`, error);
     }
