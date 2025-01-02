@@ -12,4 +12,7 @@ export default {
   CBreakerFailureThreshold: parseInt(process.env.METEO_CIRCUIT_BREAKER_FAILURE_THRESHOLD, 10) || 5,
   CBreakerSuccessThreshold: parseInt(process.env.METEO_CIRCUIT_BREAKER_SUCCESS_THRESHOLD, 10) || 3,
   CBreakerResetTimeout: parseInt(process.env.METEO_CIRCUIT_BREAKER_RESET_TIMEOUT, 10) || 30000,
+  redisHost: process.env.REDIS_HOST || 'localhost',
+  redisPort: parseInt(process.env.REDIS_PORT, 10) || 6379,
+  redisTTL: parseInt(process.env.REDIS_TTL, 10) || 86400,
 };
