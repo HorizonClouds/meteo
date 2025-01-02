@@ -5,12 +5,15 @@ import standardizedResponse from './middlewares/standardResponseMiddleware.js';
 import errorHandler from './middlewares/errorHandler.js';
 import meteoRoute from './routes/meteoRoute.js';
 import { swaggerSetup } from './swagger.js';
+import authenticateToken from './middlewares/auth.js';
 
 const app = express();
 const port = config.backendPort;
+swaggerSetup(app);
 
 app.use(express.json());
 app.use(standardizedResponse);
+app.use(authenticateToken);
 
 app.use('/api', meteoRoute);
 
@@ -19,8 +22,6 @@ app.get('/', (req, res) => {
 });
 
 app.use(errorHandler);
-
-swaggerSetup(app);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

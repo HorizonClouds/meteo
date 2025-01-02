@@ -13,7 +13,7 @@ export const rateLimiter = () => {
   const currentTime = Date.now();
 
   // Remove timestamps that are older than one minute
-  requestTimestamps = requestTimestamps.filter(timestamp => currentTime - timestamp < 60000);
+  requestTimestamps = requestTimestamps.filter((timestamp) => currentTime - timestamp < 60000);
   let timeSinceLastRequest = currentTime - (requestTimestamps[requestTimestamps.length - 1] ?? 0);
   let details = {
     requestsInLastMinute: requestTimestamps.length,
