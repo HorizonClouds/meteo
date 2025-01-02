@@ -93,6 +93,15 @@ export class TooManyRequestsError extends Error {
   }
 }
 
+export class CircuitBreakerError extends Error {
+  constructor(message = 'Circuit breaker error', details) {
+    super(message);
+    this.details = details;
+    this.appCode = stdOptions.appCodes.internalServerError;
+    this.statusCode = stdOptions.codes.internalServerError;
+  }
+}
+
 export default {
   NotFoundError,
   BadRequestError,
@@ -102,4 +111,5 @@ export default {
   WrongMeteoCall,
   RateLimitExceededError,
   TooManyRequestsError,
+  CircuitBreakerError,
 };

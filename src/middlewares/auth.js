@@ -33,7 +33,7 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Print a vaild token to the console
-const token = jwt.sign({ serviceId: 'admin-service' }, JWT_SECRET, { expiresIn: '1m' });
+const token = jwt.sign({ serviceId: 'admin-service' }, JWT_SECRET, { expiresIn: '30m' });
 console.log('Valid token:\n', token);
 
 export default authenticateToken;

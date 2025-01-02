@@ -1,6 +1,6 @@
 // forecast?latitude=37.3891&longitude=-5.994072&daily=temperature_2m_max%2Ctemperature_2m_min%2Crain_sum%2Cprecipitation_probability_max
 
-const fakeResponse = {
+const getFakeResponse = () => ({
   fake: true,
   latitude: 37.375,
   longitude: -6,
@@ -23,6 +23,5 @@ const fakeResponse = {
     rain_sum: [0, 0, 0, 0, 0, 14.5, 2],
     precipitation_probability_max: [0, 0, 0, 0, 4, 70, 78],
   },
-};
-
-export default fakeResponse;
+});
+export default getFakeResponse;

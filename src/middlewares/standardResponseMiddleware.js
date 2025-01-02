@@ -3,16 +3,18 @@ const standardResponseMiddleware = (req, res, next) => {
   // Custom success response method
   /**
    * Send a success response with a standard format
-   * @param {Object} data - The data to send
-   * @param {string} [message='Success!'] - The message to send
-   * @param {number} [statusCode=200] - The status code to send
-   * @param {string} [appCode='OK'] - The application code
+   * @param {Object} content - The content object containing response details
+   * @param {Object} content.data - The data to send
+   * @param {string} [content.message='Success!'] - The message to send
+   * @param {number} [content.statusCode=200] - The status code to send
+   * @param {string} [content.appCode='OK'] - The application code
+   * @param {Object} [content.details] - Additional details
    * @returns {void}
    * @example
-   * res.sendSuccess({ name: 'John Doe' });
+   * res.sendSuccess({ data: { name: 'John Doe' } });
    */
-  res.sendSuccess = (data, message = 'Success!', statusCode = 200, appCode = 'OK') => {
-    sendSuccess(res, data, message, statusCode, appCode);
+  res.sendSuccess = (content) => {
+    sendSuccess(res, content);
   };
 
   // Improved custom error response method
