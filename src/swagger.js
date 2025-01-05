@@ -17,6 +17,10 @@ const options = {
         url: '/',
         description: 'Development server',
       },
+      {
+        url: '/api/v1/meteo/',
+        description: 'Api Gateway server',
+      },
     ],
     components: {
       securitySchemes: {
