@@ -10,24 +10,23 @@ allowedServicesArray.push('admin-service');
 let forbiddenError = new ForbiddenError('Unauthorized');
 
 const authenticateToken = (req, res, next) => {
-  const token = req.header('Authorization')?.split(' ')[1];
+  const token = req.header('Authorization')?.split(' ')[1]; 
   if (!token) {
     forbiddenError.message = 'Token not provided';
     throw forbiddenError;
   }
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  jwt.verify(token, JWT_SECRET, (err, tokenPayload) => {
     if (err) {
       forbiddenError.message = 'Invalid token';
       throw forbiddenError;
     }
 
-    if (!allowedServicesArray.includes(user.serviceId)) {
+    if (!allowedServicesArray.includes(tokenPayload.serviceId)) {
       forbiddenError.message = 'Service not allowed';
       throw forbiddenError;
     }
 
-    req.user = user;
     next();
   });
 };
