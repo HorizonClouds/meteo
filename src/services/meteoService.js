@@ -3,10 +3,12 @@ import circuitBreaker from '../utils/circuitBreaker.js';
 import { WrongMeteoCall } from '../utils/customErrors.js';
 import getFakeResponse from '../utils/fakeResponse.js';
 import config from '../config.js';
+import logger from '../utils/logger.js';
 
 export const getForecast = async (latitude, longitude, stringURLParams, forceOpen = false) => {
 
   let result;
+logger.debug(`Using mock API: ${config.useMockApi}`);
   if (config.useMockApi) {
     result = await circuitBreaker(getFakeResponse, forceOpen);
     return { data: result.response, details: result.details };

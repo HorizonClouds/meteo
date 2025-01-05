@@ -4,13 +4,13 @@ dotenv.config(); // Load environment variables
 
 export default {
   // Rate limiter configuration
-  maxRequestsPerMinute: parseInt(process.env.MAX_REQUESTS_PER_MINUTE, 10) || 60,
-  minIntervalBetweenRequests: parseInt(process.env.MIN_INTERVAL_BETWEEN_REQUESTS, 10) || 1000,
+  maxRequestsPerMinute: parseInt(process.env.MAX_REQUESTS_PER_MINUTE, 10) || 6,
+  minIntervalBetweenRequests: parseInt(process.env.MIN_INTERVAL_BETWEEN_REQUESTS, 10) || 10000,
   // API configuration
-  useMockApi: process.env.USE_MOCK_API === 'true' || true,
+  useMockApi: process.env.USE_MOCK_API === 'true',
   backendPort: parseInt(process.env.BACKEND_PORT, 10) || 3000,
   // JWT configuration
-  jwtSecret: process.env.JWT_SECRET || 'meteo-secret',
+  jwtSecret: process.env.JWT_SECRET || 'horizon-secret',
   allowedServices: process.env.ALLOWED_SERVICES || 'itineraries-service',
   // Circuit breaker configuration
   CBreakerFailureThreshold: parseInt(process.env.METEO_CIRCUIT_BREAKER_FAILURE_THRESHOLD, 10) || 5,

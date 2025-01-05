@@ -15,15 +15,17 @@ const authenticateToken = (req, res, next) => {
     forbiddenError.message = 'Token not provided';
     throw forbiddenError;
   }
-
+  
   jwt.verify(token, JWT_SECRET, (err, tokenPayload) => {
     if (err) {
       forbiddenError.message = 'Invalid token';
+      forbiddenError.details = err
       throw forbiddenError;
     }
 
     if (!allowedServicesArray.includes(tokenPayload.serviceId)) {
       forbiddenError.message = 'Service not allowed';
+      forbiddenError.details = "Required payload: { serviceId: 'service-name' }";
       throw forbiddenError;
     }
 
