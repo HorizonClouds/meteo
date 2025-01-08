@@ -1,4 +1,3 @@
-
 export const stdOptions = {
   codes: {
     success: 200,
@@ -10,6 +9,7 @@ export const stdOptions = {
     notFound: 404,
     conflict: 409,
     internalServerError: 500,
+    circuitBreakerError: 503,
   },
   appCodes: {
     ok: 'OK',
@@ -24,6 +24,7 @@ export const stdOptions = {
     wrongMeteroCall: 'WRONG_METEO_CALL',
     tooManyRequests: 'TOO_MANY_REQUESTS',
     rateLimitExceeded: 'RATE_LIMIT_EXCEEDED',
+    circuitBreakerError: 'CIRCUIT_BREAKER_ERROR',
   },
   status: {
     success: 'success', // 2xx
@@ -32,17 +33,13 @@ export const stdOptions = {
   },
 };
 
-export function sendSuccess(
-  res,
-  data,
-  message = 'Success!',
-  statusCode = stdOptions.codes.success,
-  appCode = stdOptions.appCodes.ok
-) {
+export function sendSuccess(res, content){
+  let { data, message = 'Success!', statusCode = stdOptions.codes.success, appCode = stdOptions.appCodes.ok, details } = content;
   res.status(statusCode).json({
     status: 'success',
     message,
     data,
+    details,
     appCode,
     timestamp: new Date().toISOString(),
   });
